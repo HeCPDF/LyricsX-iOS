@@ -43,6 +43,7 @@ struct MainView: View {
                         .environmentObject(coreStore)
                 }
         }
+        .navigationViewStyle(.stack)
     }
 }
 
