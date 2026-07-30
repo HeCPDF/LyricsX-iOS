@@ -33,7 +33,7 @@ jobs:
         run: |
           xcodebuild build \
             -project LyricsX-iOS.xcodeproj \
-            -target "LyricsX-iOS" \
+            -scheme "LyricsX-iOS" \
             -configuration Debug \
             -destination "generic/platform=iOS" \
             CODE_SIGNING_ALLOWED=NO \
