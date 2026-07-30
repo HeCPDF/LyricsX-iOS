@@ -41,9 +41,26 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY=""
 
+      - name: Package unsigned IPA
+        run: |
+          set -e
+          PRODUCTS_DIR="DerivedData/Build/Products/Debug-iphoneos"
+          PAYLOAD_DIR="Payload"
+          rm -rf "$PAYLOAD_DIR"
+          mkdir "$PAYLOAD_DIR"
+          cp -R "$PRODUCTS_DIR"/*.app "$PAYLOAD_DIR"/
+          zip -r -y LyricsX-iOS-unsigned.ipa "$PAYLOAD_DIR"
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: LyricsX-iOS
           path: DerivedData/Build/Products/Debug-iphoneos/*.app
+          if-no-files-found: error
+
+      - name: Upload unsigned IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LyricsX-iOS-unsigned-ipa
+          path: LyricsX-iOS-unsigned.ipa
           if-no-files-found: error
